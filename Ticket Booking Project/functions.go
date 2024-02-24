@@ -36,18 +36,6 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTicket
 }
 
-// Validate the user's input
-func validateUser(firstName string, lastName string, email string, userTicket uint) (bool, bool, bool) {
-	var isValidName = len(firstName) > 2 && len(lastName) > 2
-
-	// Use to check if a string contains a substring
-	var isValidEmail = strings.Contains(email, "@") && strings.Contains(email, ".")
-
-	var isValidTicket = userTicket > 0 && userTicket <= remainingTickets
-
-	return isValidName, isValidEmail, isValidTicket
-}
-
 // function for booking tickets
 func bookTickets(firstName string, lastName string, userTicket uint) ([]string, uint) {
 	fmt.Println("\nThank you", firstName, lastName, "for booking", userTicket, "tickets for the", conferenceName)

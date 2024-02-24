@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Ticket_Booking_Project/validate" // Import the validate package from the Ticket_Booking_Project folder
 	"fmt"
 )
 
@@ -19,7 +20,8 @@ func main() {
 		var firstName, lastName, email, userTicket = getUserInput()
 
 		// function to validate user input
-		var isValidName, isValidEmail, isValidTicket = validateUser(firstName, lastName, email, userTicket)
+		// Here, we are using the ValidateUser function from the validate package and keeping the function name uppercase to make it public
+		var isValidName, isValidEmail, isValidTicket = validate.ValidateUser(firstName, lastName, email, userTicket, remainingTickets)
 
 		// If the user data is valid, book the tickets
 		if isValidName && isValidEmail && isValidTicket {
