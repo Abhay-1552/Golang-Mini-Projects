@@ -37,7 +37,7 @@ func getUserInput() (string, string, string, uint) {
 }
 
 // function for booking tickets
-func bookTickets(firstName string, lastName string, userTicket uint) ([]string, uint) {
+func bookTickets(firstName string, lastName string, userTicket uint, email string) {
 	fmt.Println("\nThank you", firstName, lastName, "for booking", userTicket, "tickets for the", conferenceName)
 
 	// reduce the number of tickets
@@ -45,11 +45,16 @@ func bookTickets(firstName string, lastName string, userTicket uint) ([]string, 
 
 	fmt.Println("We have", remainingTickets, "tickets remaining for the", conferenceName, "out of", conferenceTicket, "tickets.")
 
-	// Add the user to the bookings array
-	var fullName = firstName + " " + lastName
-	bookings = append(bookings, fullName)
+	// Create a struct to store the user data
+	// Struct is a user-defined data type that contains a collection of named fields/properties
+	var userData = userData{
+		firstName:  firstName,
+		lastName:   lastName,
+		email:      email,
+		userTicket: userTicket,
+	}
 
-	return bookings, remainingTickets
+	bookings = append(bookings, userData)
 }
 
 // Print the first name of the people who have booked tickets
@@ -58,11 +63,8 @@ func printFirstName() []string {
 
 	// _ is a blank identifier used to ignore the index
 	for _, name := range bookings {
-
-		// Use to split a string into substrings
-		var first = strings.Fields(name)
-
-		firstNames = append(firstNames, first[0])
+		firstNames = append(firstNames, name.firstName) // Take the first name from the struct and append it to the firstNames array
 	}
+
 	return firstNames
 }

@@ -8,8 +8,15 @@ import (
 const conferenceTicket = 50
 
 var conferenceName = "Go Conference"
-var remainingTickets uint = 50 // uint is an unsigned integer
-var bookings []string          // Array of strings of undefined length
+var remainingTickets uint = 50     // uint is an unsigned integer
+var bookings = make([]userData, 0) // Array of maps of undefined length
+
+type userData struct {
+	firstName  string
+	lastName   string
+	email      string
+	userTicket uint
+}
 
 func main() {
 	// function to greet the user
@@ -26,7 +33,7 @@ func main() {
 		// If the user data is valid, book the tickets
 		if isValidName && isValidEmail && isValidTicket {
 			// function to book tickets
-			bookTickets(firstName, lastName, userTicket)
+			bookTickets(firstName, lastName, userTicket, email)
 
 			// function to print the first name of the people who have booked tickets
 			var firstNames = printFirstName()
