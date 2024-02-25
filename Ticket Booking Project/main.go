@@ -3,6 +3,7 @@ package main
 import (
 	"Ticket_Booking_Project/validate" // Import the validate package from the Ticket_Booking_Project folder
 	"fmt"
+	"sync"
 )
 
 const conferenceTicket = 50
@@ -10,6 +11,8 @@ const conferenceTicket = 50
 var conferenceName = "Go Conference"
 var remainingTickets uint = 50     // uint is an unsigned integer
 var bookings = make([]userData, 0) // Array of maps of undefined length
+
+var wg = sync.WaitGroup{}
 
 type userData struct {
 	firstName  string
@@ -35,6 +38,11 @@ func main() {
 			// function to book tickets
 			bookTickets(firstName, lastName, userTicket, email)
 
+			wg.Add(1) // Add 1 to the WaitGroup counter
+
+			// function to send a confirmation email
+			go sendTickets(firstName, lastName, userTicket, email)
+
 			// function to print the first name of the people who have booked tickets
 			var firstNames = printFirstName()
 			fmt.Println("\nThe following people have booked tickets for the", conferenceName, ":", firstNames)
@@ -57,5 +65,6 @@ func main() {
 			}
 			continue
 		}
+		wg.Wait() // Wait for all the goroutines to finish
 	}
 }

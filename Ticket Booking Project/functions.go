@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 // Greet the user
@@ -67,4 +68,17 @@ func printFirstName() []string {
 	}
 
 	return firstNames
+}
+
+// function to send a confirmation email
+func sendTickets(firstName string, lastName string, userTicket uint, email string) {
+	// time.Sleep is used to simulate a delay
+	time.Sleep(5 * time.Second)
+
+	fmt.Println("\n----------------------------------------")
+	fmt.Println("Sending tickets to the attendees...")
+	fmt.Println("SENDING TICKETS:", userTicket, "number of tickets to", firstName, lastName, "at", email)
+	fmt.Println("----------------------------------------")
+
+	wg.Done() // Subtract 1 from the WaitGroup counter
 }
