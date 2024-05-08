@@ -12,7 +12,7 @@ var conferenceName = "Go Conference"
 var remainingTickets uint = 50     // uint is an unsigned integer
 var bookings = make([]userData, 0) // Array of maps of undefined length
 
-var wg = sync.WaitGroup{}
+var wg = sync.WaitGroup{} // WaitGroup is a struct type that waits for a collection of goroutines to finish
 
 type userData struct {
 	firstName  string
